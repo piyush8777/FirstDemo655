@@ -1,28 +1,25 @@
-#! /bin/bash
+#!/bin/bash
 
-low=1
-count=0
-
-while [ $low -eq 1 ]
+echo 'Enter no'
+ read x
+ n=2
+ while [ $n -le $x ] 
 do
-echo "Enter the lower limit,greater than 1"
-read low
-done
+ i=2
+ count=1 
 
-echo "Enter the upper limit"
-read upper
-
-
-for mun in `seq $low $upper`
+while [ $i -lt $n ] 
 do
-ret=$(factor $mun | grep $mun | cut -d ":" -f 2 | cut -d " " -f 2)
-
-if [ "$ret" -eq "$mun" ] 
+ if [ `expr $n % $i` -eq 0 ] 
 then 
-echo "$mun is prime" 
-((count++))
-fi 
+count=0 
+break 
+fi
+ i=`expr $i + 1` 
+done 
+if [ $count -eq 1 ]
+ then
+ echo "$n is Prime"
+ fi 
+n=`expr $n + 1`
 done
-
-echo -e "\n There are $count number of prime numbers"
-
